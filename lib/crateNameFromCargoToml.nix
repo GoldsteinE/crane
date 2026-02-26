@@ -15,7 +15,7 @@ let
 
   origSrc = src: if src ? _isLibCleanSourceWith then src.origSrc else src;
 
-  src = builtins.trace "meow ${builtins.toJSON args.src}" (origSrc (args.src or throwMsg));
+  src = builtins.trace "meow meow ${builtins.toJSON args.src}" (origSrc (args.src or throwMsg));
   cargoToml = args.cargoToml or (src + "/Cargo.toml");
   cargoTomlContents =
     args.cargoTomlContents
