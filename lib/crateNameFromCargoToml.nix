@@ -26,7 +26,7 @@ let
   # threaded through (error is `the string ... is not allowed to refer to a store path`).
   # We can work around this by discarding the context before parsing the TOML since we don't
   # actually care about any dependency derivations, we just want to parse the name and version
-  toml = builtins.fromTOML (builtins.unsafeDiscardStringContext cargoTomlContents);
+  toml = builtins.fromTOML cargoTomlContents;
 
   debugPath = if args ? cargoTomlContents then "provided Cargo.toml contents" else cargoToml;
 

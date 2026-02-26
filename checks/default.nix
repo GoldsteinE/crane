@@ -766,11 +766,10 @@ onlyDrvs (
         let
           mkVendor =
             whichLib:
-            builtins.unsafeDiscardStringContext (
               (whichLib.vendorCargoDeps {
                 src = ./simple-git;
               }).drvPath
-            );
+            ;
           expected = mkVendor myLib;
           actual = mkVendor myLibCross;
         in

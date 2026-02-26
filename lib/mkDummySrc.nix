@@ -98,7 +98,7 @@ let
   # https://github.com/ipetkov/crane/issues/46
   origSrc = if src ? _isLibCleanSourceWith then src.origSrc else src;
 
-  uncleanSrcBasePath = builtins.unsafeDiscardStringContext ((toString origSrc) + "/");
+  uncleanSrcBasePath = ((toString origSrc) + "/");
   uncleanFiles = findCargoFiles origSrc;
 
   cargoTomlsBase = uncleanSrcBasePath;
@@ -136,7 +136,7 @@ let
         # safe to throw away any context (to the Nix store) the original path may have carried.
         # Given that we call `cleanSourceWith` earlier, we know that the input `src` must be valid
         # (or else we would have other errors to deal with)
-        cargoTomlDest = builtins.unsafeDiscardStringContext (removePrefix cargoTomlsBase (toString p));
+        cargoTomlDest = (removePrefix cargoTomlsBase (toString p));
         parentDir = "$out/${dirOf cargoTomlDest}";
 
         # NB: do not use string interpolation or toString or else the path checks won't work
@@ -343,7 +343,7 @@ let
   sourceName =
     let
       # NB: we just want to get the source's name but not depend on it
-      srcStorePath = builtins.unsafeDiscardStringContext (removePrefix storeDir src);
+      srcStorePath = (removePrefix storeDir src);
       # NB: skip all potential hash sequences sometimes there can be two!
       # https://github.com/ipetkov/crane/issues/242
       nameWithoutHash = match "/([a-z0-9]{32}-)+(.*)" srcStorePath;
