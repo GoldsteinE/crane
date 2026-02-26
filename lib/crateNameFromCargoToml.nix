@@ -15,7 +15,7 @@ let
 
   origSrc = src: if src ? _isLibCleanSourceWith then src.origSrc else src;
 
-  src = origSrc (args.src or throwMsg);
+  src = builtins.trace "${builtins.toJSON origSrc}" (origSrc (args.src or throwMsg));
   cargoToml = args.cargoToml or (src + "/Cargo.toml");
   cargoTomlContents =
     args.cargoTomlContents
